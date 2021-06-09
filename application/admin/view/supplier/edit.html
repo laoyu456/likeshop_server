@@ -1,0 +1,104 @@
+{layout name="layout2" /} 
+<script src="__PUBLIC__/static/common/js/area.js"></script>
+<div class="layui-form" lay-filter="layuiadmin-form-unit" id="layuiadmin-form-unit" style="padding: 20px 30px 0 0;">
+    <input type="hidden" value="{$info.id}" name="id">
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="white-space: nowrap;"><font color="red">*</font>供货商名称：</label>
+        <div class="layui-input-inline" style="width: 400px">
+            <input type="text" name="name" value="{$info.name}" lay-verify="required" lay-vertype="tips" placeholder="" autocomplete="off" class="layui-input">
+        </div> 
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="white-space: nowrap;"><font color="red">*</font>联系人姓名：</label>
+        <div class="layui-input-inline" style="width: 400px">
+            <input type="text" name="contact" value="{$info.contact}" lay-verify="required" lay-vertype="tips" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="white-space: nowrap;"><font color="red">*</font>联系电话：</label>
+        <div class="layui-input-inline" style="width: 400px">
+            <input type="text" name="tel" value="{$info.tel}" lay-verify="required" lay-vertype="tips" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+   <div class="layui-form-item">
+        <label class="layui-form-label" style="white-space: nowrap;"><font color="red">*</font>类型：</label>
+        <div class="layui-input-inline" style="width: 400px">
+        	{if $info['stype']}
+            <input type="radio" name="stype"   value="0" title="厂家"     class="layui-input" />
+            <input type="radio" name="stype"   value="1" title="代理商"  checked=""   class="layui-input" />
+            {else/}
+             <input type="radio" name="stype"   value="0" title="厂家"  checked=""    class="layui-input" />
+            <input type="radio" name="stype"   value="1" title="代理商"    class="layui-input" />
+            {/if}
+        </div>
+    </div>
+    
+     <div class="layui-form-item">
+        <label class="layui-form-label" style="white-space: nowrap;"><font color="red">*</font>所属城市：</label>
+        <div class="layui-input-inline" id="area-picker" style="width: 600px">
+              <div class="layui-input-inline" style="width: 200px;">
+                <select name="province" class="province-selector" data-value="江苏省" lay-filter="province-1">
+                    <option value="">请选择省</option>
+                </select>
+            </div>
+            <div class="layui-input-inline" style="width: 200px;">
+                <select name="city" class="city-selector" data-value="南京市" lay-filter="city-1">
+                    <option value="">请选择市</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="white-space: nowrap;"><font color="red">*</font>联系地址：</label>
+        <div class="layui-input-inline" style="width: 400px">
+            <input type="text" name="address" value="{$info.address}" lay-verify="required" lay-vertype="tips" placeholder="" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label" style="white-space: nowrap;">备注：</label>
+        <div class="layui-input-inline" >
+            <textarea name="remark" placeholder="" class="layui-textarea" style="width: 400px;height: 100px">{$info.remark}</textarea>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="supplier-submit-edit" id="supplier-submit-edit" value="确认">
+    </div>
+</div>
+<script>
+    layui.config({
+        version:"{$front_version}",
+        base: '/static/plug/layui-admin/dist/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form'], function(){
+        var $ = layui.$
+
+
+
+
+    })
+     layui.config({
+            base: '/static/plug/mods/'
+            , version: '1.0'
+        });
+     //一般直接写在一个js文件中
+        layui.use(['layer', 'form', 'layarea'], function () {
+            var layer = layui.layer
+                , form = layui.form
+                , layarea = layui.layarea;
+
+            layarea.render({
+                elem: '#area-picker',
+                change: function (res) {
+                    //选择结果
+                    console.log(res);
+                }
+            });
+        });
+    
+</script>
